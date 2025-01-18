@@ -1,5 +1,6 @@
-
 var builder = DistributedApplication.CreateBuilder(args);
+
+// infrastructure
 
 var sql = builder.AddSqlServer("sql")
     .WithLifetime(ContainerLifetime.Persistent);
@@ -10,7 +11,10 @@ var bootstrapper = builder.AddProject<Projects.hangfire_signalr_sample_Bootstrap
     .WithReference(db)
     .WaitFor(db);
 
+// backend
+
 var apiService = builder.AddProject<Projects.hangfire_signalr_sample_ApiService>("apiservice")
+    .WithExternalHttpEndpoints()
     .WithReference(bootstrapper)
     .WaitFor(bootstrapper)
     .WithReference(db);
@@ -20,8 +24,9 @@ var workerService = builder.AddProject<Projects.hangfire_signalr_sample_WorkerSe
     .WithReference(apiService)
     .WaitFor(apiService);
 
-builder.AddProject<Projects.hangfire_signalr_sample_Web>("webfrontend")
-    .WithExternalHttpEndpoints()
+// frontends
+
+builder.AddProject<Projects.hangfire_signalr_sample_WpfClient>("wpfClient")
     .WithReference(apiService)
     .WaitFor(apiService);
 

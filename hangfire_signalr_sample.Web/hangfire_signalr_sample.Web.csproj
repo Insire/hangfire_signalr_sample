@@ -1,7 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
-
-  <ItemGroup>
-    <ProjectReference Include="..\hangfire_signalr_sample.ServiceDefaults\hangfire_signalr_sample.ServiceDefaults.csproj" />
-  </ItemGroup>
-
-</Project>

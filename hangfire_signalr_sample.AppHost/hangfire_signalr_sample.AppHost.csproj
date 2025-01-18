@@ -9,8 +9,8 @@
   <ItemGroup>
     <ProjectReference Include="..\hangfire_signalr_sample.ApiService\hangfire_signalr_sample.ApiService.csproj" />
     <ProjectReference Include="..\hangfire_signalr_sample.Bootstrapper\hangfire_signalr_sample.Bootstrapper.csproj" />
-    <ProjectReference Include="..\hangfire_signalr_sample.Web\hangfire_signalr_sample.Web.csproj" />
     <ProjectReference Include="..\hangfire_signalr_sample.WorkerService\hangfire_signalr_sample.WorkerService.csproj" />
+    <ProjectReference Include="..\hangfire_signalr_sample.WpfClient\hangfire_signalr_sample.WpfClient.csproj" />
   </ItemGroup>
 
   <ItemGroup>
