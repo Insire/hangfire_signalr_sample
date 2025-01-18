@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsAspireHost>true</IsAspireHost>
+    <UserSecretsId>37df7864-c01e-49a7-a4a1-9f07c2087223</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\hangfire_signalr_sample.ApiService\hangfire_signalr_sample.ApiService.csproj" />
+    <ProjectReference Include="..\hangfire_signalr_sample.Bootstrapper\hangfire_signalr_sample.Bootstrapper.csproj" />
+    <ProjectReference Include="..\hangfire_signalr_sample.Web\hangfire_signalr_sample.Web.csproj" />
+    <ProjectReference Include="..\hangfire_signalr_sample.WorkerService\hangfire_signalr_sample.WorkerService.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" />
+    <PackageReference Include="Aspire.Hosting.SqlServer" />
+  </ItemGroup>
+
+</Project>

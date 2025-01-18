@@ -1,0 +1,54 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.0.0
+MinimumVisualStudioVersion = 17.8.0.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "hangfire_signalr_sample.AppHost", "hangfire_signalr_sample.AppHost\hangfire_signalr_sample.AppHost.csproj", "{AD1B9F8E-88E5-4389-BFC0-BC8F0CF87B8B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "hangfire_signalr_sample.ServiceDefaults", "hangfire_signalr_sample.ServiceDefaults\hangfire_signalr_sample.ServiceDefaults.csproj", "{9C83E6E1-553F-4F35-98FD-587A7125F920}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "hangfire_signalr_sample.ApiService", "hangfire_signalr_sample.ApiService\hangfire_signalr_sample.ApiService.csproj", "{024ADE1B-EFEC-432F-80FD-9484DB95B30F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "hangfire_signalr_sample.Web", "hangfire_signalr_sample.Web\hangfire_signalr_sample.Web.csproj", "{E165EC6E-98F8-467C-89CC-02AD4992930F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hangfire_signalr_sample.WorkerService", "hangfire_signalr_sample.WorkerService\hangfire_signalr_sample.WorkerService.csproj", "{D7A66DB8-F746-45E8-AF14-84E0C3994A06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hangfire_signalr_sample.Bootstrapper", "hangfire_signalr_sample.Bootstrapper\hangfire_signalr_sample.Bootstrapper.csproj", "{1738CF5F-95FC-44EC-8A04-07EE19B933C2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD1B9F8E-88E5-4389-BFC0-BC8F0CF87B8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD1B9F8E-88E5-4389-BFC0-BC8F0CF87B8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD1B9F8E-88E5-4389-BFC0-BC8F0CF87B8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD1B9F8E-88E5-4389-BFC0-BC8F0CF87B8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C83E6E1-553F-4F35-98FD-587A7125F920}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C83E6E1-553F-4F35-98FD-587A7125F920}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C83E6E1-553F-4F35-98FD-587A7125F920}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C83E6E1-553F-4F35-98FD-587A7125F920}.Release|Any CPU.Build.0 = Release|Any CPU
+		{024ADE1B-EFEC-432F-80FD-9484DB95B30F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{024ADE1B-EFEC-432F-80FD-9484DB95B30F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{024ADE1B-EFEC-432F-80FD-9484DB95B30F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{024ADE1B-EFEC-432F-80FD-9484DB95B30F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E165EC6E-98F8-467C-89CC-02AD4992930F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E165EC6E-98F8-467C-89CC-02AD4992930F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E165EC6E-98F8-467C-89CC-02AD4992930F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E165EC6E-98F8-467C-89CC-02AD4992930F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7A66DB8-F746-45E8-AF14-84E0C3994A06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7A66DB8-F746-45E8-AF14-84E0C3994A06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7A66DB8-F746-45E8-AF14-84E0C3994A06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7A66DB8-F746-45E8-AF14-84E0C3994A06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1738CF5F-95FC-44EC-8A04-07EE19B933C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1738CF5F-95FC-44EC-8A04-07EE19B933C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1738CF5F-95FC-44EC-8A04-07EE19B933C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1738CF5F-95FC-44EC-8A04-07EE19B933C2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {00426829-1086-4880-8BE7-A63068BA8052}
+	EndGlobalSection
+EndGlobal

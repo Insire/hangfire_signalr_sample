@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "hangfire_signalr_sample.Bootstrapper": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}

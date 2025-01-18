@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "hangfire_signalr_sample.WorkerService": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
