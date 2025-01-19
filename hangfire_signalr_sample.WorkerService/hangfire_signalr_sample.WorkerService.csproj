@@ -13,4 +13,8 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\hangfire_signalr_sample.Jobs\hangfire_signalr_sample.Jobs.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,8 @@
 ﻿using Hangfire;
+using hangfire_signalr_sample.Jobs;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace hangfire_signalr_sample.WorkerService
@@ -10,10 +12,13 @@ namespace hangfire_signalr_sample.WorkerService
         static void Main(string[] args)
         {
             HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
+            IHost host = null!;
+
             builder.Services.AddHangfire(configuration => configuration
                 .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
                 .UseSimpleAssemblyNameTypeSerializer()
                 .UseRecommendedSerializerSettings()
+                .UseActivator(new HangfireActivator(() => host))
                 .UseSqlServerStorage(builder.Configuration.GetConnectionString("database"), new Hangfire.SqlServer.SqlServerStorageOptions()
                 {
                     SqlClientFactory = SqlClientFactory.Instance,
@@ -30,10 +35,12 @@ namespace hangfire_signalr_sample.WorkerService
             builder.Services.AddHangfireServer(configuration =>
             {
                 configuration.WorkerCount = 1;
-                configuration.Queues = new[] { "default" };
+                configuration.Queues = ["default"];
             });
 
-            IHost host = builder.Build();
+            builder.Services.AddSingleton<JobsService>();
+
+            host = builder.Build();
             host.Run();
         }
     }

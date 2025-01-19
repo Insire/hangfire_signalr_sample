@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.ComponentModel;
+using System.Net.Http;
 using System.Reactive.Concurrency;
 using System.Windows;
 
@@ -14,7 +14,6 @@ namespace hangfire_signalr_sample.WpfClient
     {
         private ServiceProvider _serviceProvider;
         private readonly IConfigurationRoot _configuration;
-        private readonly HubConnection _hubConnection;
 
         public App()
         {
@@ -34,6 +33,10 @@ namespace hangfire_signalr_sample.WpfClient
                 .AddSingleton<IScheduler>(_ =>
                 {
                     return Dispatcher.Invoke(() => new SynchronizationContextScheduler(SynchronizationContext.Current!));
+                })
+                .AddSingleton(new HttpClient(new HttpLoggingHandler())
+                {
+                    BaseAddress = new Uri(url)
                 })
                 .BuildServiceProvider();
         }
