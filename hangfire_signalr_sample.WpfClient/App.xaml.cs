@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
+﻿using hangfire_signalr_sample.ApiContracts;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http;
@@ -22,14 +23,11 @@ public partial class App : Application
             .Build();
 
         var url = _configuration.GetValue<string>("services:apiservice:https:0")!;
-        var uri = new Uri(url + "/jobs");
 
         _serviceProvider = new ServiceCollection()
             .AddSingleton<MainWindowViewModel>()
             .AddSingleton<IConfiguration>(_configuration)
-            .AddSingleton(new HubConnectionBuilder()
-                .WithUrl(uri)
-                .Build())
+            .AddSingleton(SignalRExtensions.GetHubConnection(url))
             .AddSingleton<IScheduler>(_ =>
             {
                 return Dispatcher.Invoke(() => new SynchronizationContextScheduler(SynchronizationContext.Current!));

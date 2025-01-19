@@ -1,4 +1,5 @@
 ﻿using Hangfire;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Logging;
 
 namespace hangfire_signalr_sample.Jobs;
@@ -6,10 +7,12 @@ namespace hangfire_signalr_sample.Jobs;
 public sealed class JobsService
 {
     private readonly ILogger<JobsService> _logger;
+    private readonly HubConnection _hubConnection;
 
-    public JobsService(ILogger<JobsService> logger)
+    public JobsService(ILogger<JobsService> logger, HubConnection hubConnection)
     {
         _logger = logger;
+        _hubConnection = hubConnection;
     }
 
     [Queue("default")]
@@ -19,8 +22,15 @@ public sealed class JobsService
     }
 
     [Queue("default")]
-    public void PostJob(string jobId)
+    public async Task PostJob(string jobId)
     {
         _logger.LogInformation("PostJob: {0}", jobId);
+
+        if (!(_hubConnection.State == HubConnectionState.Connected || _hubConnection.State == HubConnectionState.Connecting))
+        {
+            await _hubConnection.StartAsync();
+        }
+
+        await _hubConnection.SendAsync("SendMessage", Guid.NewGuid(), "WorkerService", $"Job {jobId} completed");
     }
 }

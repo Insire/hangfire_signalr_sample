@@ -1,8 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <ItemGroup>
-    <PackageReference Include="Hangfire.Core" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Hangfire.Core" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\hangfire_signalr_sample.ApiContracts\hangfire_signalr_sample.ApiContracts.csproj" />
+    </ItemGroup>
 
 </Project>

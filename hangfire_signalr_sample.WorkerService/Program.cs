@@ -1,4 +1,5 @@
 ﻿using Hangfire;
+using hangfire_signalr_sample.ApiContracts;
 using hangfire_signalr_sample.Jobs;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +15,10 @@ internal sealed class Program
         HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
         IHost host = null!;
 
+        var url = builder.Configuration.GetValue<string>("services:apiservice:https:0")!;
+        var hubConnection = SignalRExtensions.GetHubConnection(url);
+
+        builder.Services.AddSingleton(hubConnection);
         builder.Services.AddHangfire(configuration => configuration
             .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
             .UseSimpleAssemblyNameTypeSerializer()
