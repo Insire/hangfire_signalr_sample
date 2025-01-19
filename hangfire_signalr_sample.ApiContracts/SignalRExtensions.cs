@@ -9,6 +9,7 @@ namespace hangfire_signalr_sample.ApiContracts
             var uri = new Uri(url + "/jobs");
             return new HubConnectionBuilder()
                 .WithUrl(uri)
+                .WithAutomaticReconnect()
                 .Build();
         }
     }

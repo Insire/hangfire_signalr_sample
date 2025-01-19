@@ -1,13 +1,26 @@
 using Hangfire;
+using hangfire_signalr_sample.ApiContracts;
 using hangfire_signalr_sample.ApiService;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Data.SqlClient;
+using System;
 
 internal sealed class Program
 {
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+
+        var startupUris = builder.Configuration.GetValue<string>("ASPNETCORE_URLS");
+        if (!string.IsNullOrEmpty(startupUris))
+        {
+            var split = startupUris.Split(';');
+            var https = split.Where(p => p.StartsWith("https", StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+            if (!string.IsNullOrEmpty(https))
+            {
+                builder.Services.AddSingleton(SignalRExtensions.GetHubConnection(https));
+            }
+        }
 
         // Add service defaults & Aspire components.
         builder.AddServiceDefaults();

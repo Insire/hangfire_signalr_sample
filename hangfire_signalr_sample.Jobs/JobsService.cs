@@ -31,6 +31,6 @@ public sealed class JobsService
             await _hubConnection.StartAsync();
         }
 
-        await _hubConnection.SendAsync("SendMessage", Guid.NewGuid(), "WorkerService", $"Job {jobId} completed");
+        await _hubConnection.SendAsync("SendMessage", Guid.NewGuid(), "WorkerService", jobId);
     }
 }
