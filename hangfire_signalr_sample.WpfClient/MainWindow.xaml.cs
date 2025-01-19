@@ -1,12 +1,11 @@
 ﻿using System.Windows;
 
-namespace hangfire_signalr_sample.WpfClient
+namespace hangfire_signalr_sample.WpfClient;
+
+public partial class MainWindow : Window
 {
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

@@ -5,60 +5,59 @@ using System.Net.Http;
 using System.Reactive.Concurrency;
 using System.Windows;
 
-namespace hangfire_signalr_sample.WpfClient
+namespace hangfire_signalr_sample.WpfClient;
+
+/// <summary>
+/// Interaction logic for App.xaml
+/// </summary>
+public partial class App : Application
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    private readonly ServiceProvider _serviceProvider;
+    private readonly IConfigurationRoot _configuration;
+
+    public App()
     {
-        private ServiceProvider _serviceProvider;
-        private readonly IConfigurationRoot _configuration;
+        _configuration = new ConfigurationBuilder()
+            .AddEnvironmentVariables()
+            .Build();
 
-        public App()
-        {
-            _configuration = new ConfigurationBuilder()
-                .AddEnvironmentVariables()
-                .Build();
+        var url = _configuration.GetValue<string>("services:apiservice:https:0")!;
+        var uri = new Uri(url + "/jobs");
 
-            var url = _configuration.GetValue<string>("services:apiservice:https:0");
-            var uri = new Uri(url + "/jobs");
-
-            _serviceProvider = new ServiceCollection()
-                .AddSingleton<MainWindowViewModel>()
-                .AddSingleton<IConfiguration>(_configuration)
-                .AddSingleton(new HubConnectionBuilder()
-                    .WithUrl(uri)
-                    .Build())
-                .AddSingleton<IScheduler>(_ =>
-                {
-                    return Dispatcher.Invoke(() => new SynchronizationContextScheduler(SynchronizationContext.Current!));
-                })
-                .AddSingleton(new HttpClient(new HttpLoggingHandler())
-                {
-                    BaseAddress = new Uri(url)
-                })
-                .BuildServiceProvider();
-        }
-
-        override protected void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
-
-            var viewModel = _serviceProvider.GetRequiredService<MainWindowViewModel>();
-            var mainWindow = new MainWindow()
+        _serviceProvider = new ServiceCollection()
+            .AddSingleton<MainWindowViewModel>()
+            .AddSingleton<IConfiguration>(_configuration)
+            .AddSingleton(new HubConnectionBuilder()
+                .WithUrl(uri)
+                .Build())
+            .AddSingleton<IScheduler>(_ =>
             {
-                DataContext = viewModel,
-            };
+                return Dispatcher.Invoke(() => new SynchronizationContextScheduler(SynchronizationContext.Current!));
+            })
+            .AddSingleton(new HttpClient(new HttpLoggingHandler())
+            {
+                BaseAddress = new Uri(url)
+            })
+            .BuildServiceProvider();
+    }
 
-            viewModel.ConnectCommand.Execute(null);
-            mainWindow.Show();
-        }
+    override protected void OnStartup(StartupEventArgs e)
+    {
+        base.OnStartup(e);
 
-        protected override void OnExit(ExitEventArgs e)
+        var viewModel = _serviceProvider.GetRequiredService<MainWindowViewModel>();
+        var mainWindow = new MainWindow()
         {
-            _serviceProvider.Dispose();
-            base.OnExit(e);
-        }
+            DataContext = viewModel,
+        };
+
+        viewModel.ConnectCommand.Execute(null);
+        mainWindow.Show();
+    }
+
+    protected override void OnExit(ExitEventArgs e)
+    {
+        _serviceProvider.Dispose();
+        base.OnExit(e);
     }
 }

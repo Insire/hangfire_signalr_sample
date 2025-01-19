@@ -1,20 +1,19 @@
 ﻿using Hangfire;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace hangfire_signalr_sample.WorkerService
+namespace hangfire_signalr_sample.WorkerService;
+
+public sealed class JobScope : JobActivatorScope
 {
-    public sealed class JobScope : JobActivatorScope
+    private readonly IServiceScope _scope;
+
+    public JobScope(IServiceScope scope)
     {
-        private readonly IServiceScope _scope;
+        _scope = scope;
+    }
 
-        public JobScope(IServiceScope scope)
-        {
-            _scope = scope;
-        }
-
-        public override object Resolve(Type type)
-        {
-            return _scope.ServiceProvider.GetRequiredService(type);
-        }
+    public override object Resolve(Type type)
+    {
+        return _scope.ServiceProvider.GetRequiredService(type);
     }
 }

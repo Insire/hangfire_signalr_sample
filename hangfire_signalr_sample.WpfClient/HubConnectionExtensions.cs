@@ -1,16 +1,15 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using System.Net.Http;
 
-namespace hangfire_signalr_sample.WpfClient
+namespace hangfire_signalr_sample.WpfClient;
+
+public static class HubConnectionExtensions
 {
-    public static class HubConnectionExtensions
+    public static IHubConnectionBuilder WithUrl(this IHubConnectionBuilder builder, string url, IHttpMessageHandlerFactory clientFactory)
     {
-        public static IHubConnectionBuilder WithUrl(this IHubConnectionBuilder builder, string url, IHttpMessageHandlerFactory clientFactory)
+        return builder.WithUrl(url, options =>
         {
-            return builder.WithUrl(url, options =>
-            {
-                options.HttpMessageHandlerFactory = _ => clientFactory.CreateHandler();
-            });
-        }
+            options.HttpMessageHandlerFactory = _ => clientFactory.CreateHandler();
+        });
     }
 }
