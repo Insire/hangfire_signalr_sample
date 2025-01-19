@@ -41,15 +41,15 @@ internal class Program
 
         using var command = connection.CreateCommand();
         command.CommandText = @"
-            IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'DataBase')
+            IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'hangfire_signalr_sample')
                 BEGIN
-                    CREATE DATABASE [DataBase]
+                    CREATE DATABASE [hangfire_signalr_sample]
                 END
             ";
         command.ExecuteNonQuery();
 
         command.CommandText = @"
-            USE [DataBase]";
+            USE [hangfire_signalr_sample]";
         command.ExecuteNonQuery();
 
         SqlServerObjectsInstaller.Install(connection, "hangfire", false);

@@ -5,7 +5,7 @@ var builder = DistributedApplication.CreateBuilder(args);
 var sql = builder.AddSqlServer("sql")
     .WithLifetime(ContainerLifetime.Persistent);
 
-var db = sql.AddDatabase("database");
+var db = sql.AddDatabase("database", "hangfire_signalr_sample");
 
 var bootstrapper = builder.AddProject<Projects.hangfire_signalr_sample_Bootstrapper>("bootstrapper")
     .WithReference(db)
